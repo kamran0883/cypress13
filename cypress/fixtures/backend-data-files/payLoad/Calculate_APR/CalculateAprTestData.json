@@ -1,0 +1,39 @@
+{
+  "rentalMode": "Advance",
+  "FinancedAmount": 122400,
+  "AdditionalInterestWithoutTax": 0,
+  "ContractStartDate": "2023-11-27",
+  "RentalFrequency": "Annual",
+  "IrrRoundingDetail": {
+    "IsRoundingRequired": true,
+    "Upto": 2
+  },
+  "RentalCalculationMethod": "Annuity",
+  "residualValue": 0,
+  "IsCompounded": false,
+  "CompoundingFrequency": "",
+  "RentalSlabs": [
+    {
+      "StartTerm": 1,
+      "EndTerm": 5,
+      "Amount": 9938.22,
+      "RentalType": "Auto"
+    },
+    {
+      "StartTerm": 6,
+      "EndTerm": 6,
+      "Amount": 12338.22,
+      "RentalType": "Auto"
+    },
+    {
+      "StartTerm": 7,
+      "EndTerm": 13,
+      "Amount": 9938.22,
+      "RentalType": "Auto"
+    }
+  ],
+  "balloonParamForAnnuity": {
+    "NumberOfAdvanceRentals": 4
+  },
+  "ProductType": "None"
+}

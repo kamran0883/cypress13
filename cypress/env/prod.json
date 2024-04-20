@@ -1,0 +1,10 @@
+{
+    "calculation-engine-url": "https://appexnow.netsolapp.io/flex",
+    "appex-now":"https://appexnow.netsolapp.io/market-place/appexnow-home",
+    "flex":"https://appexnow.netsolapp.io/flex",
+    "email": "neniy71007@weizixu.com",
+    "password": "Netsolpk1!",
+    "baseUrl":"https://appexnow-api.netsolapp.io/marketplace/calculate/RentalAmountAnnuityV2",
+    "apikey": "pk_unity_a720e826-31d0-11ee-88ff-c2e70a96eed8"
+    
+  }

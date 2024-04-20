@@ -1,0 +1,11 @@
+{
+    "calculation-engine-url": "https://stage.netsolapp.io/flex",
+    "appex-now":"https://stage.netsolapp.io/market-place/appexnow-home",
+    "flexSignIN":"https://dev.netsolapp.io/market-place/signup",
+    "flex":"https://stage.netsolapp.io/flex",
+    "email": "gatiyit514@sparkroi.com",
+    "password":"Netsolpk1!@",
+    "baseUrl":"https://stage-api.netsolapp.io/marketplace/calculate/RentalAmountAnnuityV2",
+    "apikey":"pk_unity_4c84b2b4-2620-11ee-89b0-f2f4824817d0"
+    
+}

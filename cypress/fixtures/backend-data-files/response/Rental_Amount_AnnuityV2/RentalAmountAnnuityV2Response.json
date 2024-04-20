@@ -1,0 +1,23 @@
+{
+  "rentalSummary": [
+    {
+      "startTerm": 1,
+      "endTerm": 5,
+      "rentalAmount": 9938.22,
+      "rentalType": "Auto"
+    },
+    {
+      "startTerm": 6,
+      "endTerm": 6,
+      "rentalAmount": 12338.22,
+      "rentalType": "Auto"
+    },
+    {
+      "startTerm": 7,
+      "endTerm": 13,
+      "rentalAmount": 9938.22,
+      "rentalType": "Auto"
+    }
+  ],
+  "updatedFinancedAmount": 122400
+}

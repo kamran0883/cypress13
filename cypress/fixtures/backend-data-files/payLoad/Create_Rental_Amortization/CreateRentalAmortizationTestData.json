@@ -1,0 +1,41 @@
+{
+  "startDate": "2023-11-27",
+  "ExtensionDays": 0,
+  "AllRentalStructuresProvided": true,
+  "requestParam": {
+    "Apr": 2.2,
+    "contractTerms": 72,
+    "FinancedAmount": 122400,
+    "ProductRateConversionMethod": "Simple",
+    "productType": "None",
+    "rentalFrequency": "Annual",
+    "rentalMode": "Advance",
+    "residualValue": 1000,
+    "StructureRental": [
+      {
+        "Amount": 9938.22,
+        "StartTerm": 1,
+        "EndTerm": 5,
+        "RentalType": "Auto",
+        "RentalFrequency": "Annual"
+      },
+      {
+        "Amount": 12338.22,
+        "StartTerm": 6,
+        "EndTerm": 6,
+        "RentalType": "Auto",
+        "RentalFrequency": "Annual"
+      },
+      {
+        "Amount": 9938.22,
+        "StartTerm": 7,
+        "EndTerm": 13,
+        "RentalType": "Auto",
+        "RentalFrequency": "Annual"
+      }
+    ]
+  },
+  "balloonParamForAnnuity": {
+    "NumberOfAdvanceRentals": 4
+  }
+}

@@ -1,0 +1,84 @@
+
+
+{
+    "DiscountRate":2.2,
+    "StartDate": "2023-11-21",
+    "RentalMode": "Advance",
+    "rentalFrequency": "Annual",
+    "RentalCalculationMethod": "Annuity",
+    "PaymentPlan": [
+        {
+            "rentalNumber": 1,
+            "rentalAmount": 9938.22,
+            "rentalType": "Structured"
+        },
+        {
+            "rentalNumber": 2,
+            "rentalAmount": 9938.22,
+            "rentalType": "Structured"
+        },
+        {
+            "rentalNumber": 3,
+            "rentalAmount":  9938.22,
+            "rentalType": "Structured"
+        },
+        {
+            "rentalNumber": 4,
+            "rentalAmount": 9938.22,
+            "rentalType": "Structured"
+        },
+        {
+            "rentalNumber": 5,
+            "rentalAmount": 9938.22,
+            "rentalType": "Structured"
+        },
+        {
+            "rentalNumber": 6,
+            "rentalAmount": 12338.22,
+            "rentalType": "Structured"
+        },
+        {
+            "rentalNumber": 7,
+            "rentalAmount": 9938.22,
+            "rentalType": "Structured"
+        },
+        {
+            "rentalNumber": 8,
+            "rentalAmount": 9938.22,
+            "rentalType": "Structured"
+        },
+        {
+            "rentalNumber": 9,
+            "rentalAmount": 9938.22,
+            "rentalType": "Structured"
+        },
+        {
+            "rentalNumber": 10,
+            "rentalAmount": 9938.22,
+            "rentalType": "Structured"
+        },
+        {
+            "rentalNumber": 11,
+            "rentalAmount": 9938.22,
+            "rentalType": "Structured"
+        },
+        {
+            "rentalNumber": 12,
+            "rentalAmount": 9938.22,
+            "rentalType": "Structured"
+        },
+        {
+            "rentalNumber": 13,
+            "rentalAmount": 9938.22,
+            "rentalType": "Structured"
+        }
+      
+    ],
+   "balloonParamForAnnuity": {
+        "NumberOfAdvanceRentals": 4
+   
+    },
+    "ProductType": "None",
+    "ResidualValue": 0
+}
+

@@ -1,0 +1,23 @@
+{
+  "requestParam": {
+    "Apr": 2.2,
+    "contractTerms": 108,
+    "FinancedAmount": 120000,
+    "rentalFrequency": "Annual",
+    "rentalMode": "Advance",
+    "residualValue": 1000,
+    "StructureRental": [],
+    "ProductRateConversionMethod": "Simple",
+    "productType": "None"
+  },
+  "ExtensionDays": 0,
+  "NumberOfAdvanceRentals": 4,
+  "RentalCalculationMethod": "Annuity",
+  "RentalNumberForVatDefferal": 6,
+  "StartDate": "2023-12-04",
+  "VatPercentage": 0,
+  "charges": [],
+  "VatAmount": 2400,
+  "VatTreatment": "VATDeferral",
+  "AllRentalStructuresProvided": false
+}

@@ -1,0 +1,6 @@
+{
+    "rentalAmountAnnuityV2":"RentalAmountAnnuityV2",
+    "calculateApr":"CalculateAPR",
+    "createRentalAmortization":"CreateRentalAmortization",
+    "presentValueCalculation":"PresentValueCalculation"
+}

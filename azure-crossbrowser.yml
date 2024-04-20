@@ -1,0 +1,169 @@
+trigger:
+  - azure-pipelines
+
+pr:
+  - azure-pipelines
+
+pool:
+  vmImage: "ubuntu-latest"
+jobs:
+  - job: build
+    displayName: "Build"
+    steps:
+      - checkout: self
+      - task: UseNode@1
+        inputs:
+          versionSpec: "14.x"
+          displayName: "Install Node.js"
+      - script: |
+          npm install
+          # npm run cy:verify
+        displayName: "Install Dependencies"
+      # - script: npm run types
+      #   displayName: 'Run Types'
+      # - script: npm run stop-only
+      #   displayName: 'Stop Only'
+      - publish: $(Build.SourcesDirectory)
+        artifact: "app"
+
+  - job: x1_electron
+    displayName: "1x Electron"
+    dependsOn: build
+    pool:
+      vmImage: "ubuntu-latest"
+    steps:
+      - download: current
+        artifact: "app"
+      - script: npm install 
+        displayName: 'Install NPM Packages'
+      - script: npm run TestbackendFiles 
+        displayName: 'Test Cypress run'
+        env:
+          # avoid warnings about terminal
+          TERM: xterm
+          # map the secret Cypress record key as environment variable for this step
+          CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEYs)
+
+  - job: x2_chrome
+    displayName: "2x chrome"
+    dependsOn: build
+    pool:
+      vmImage: "ubuntu-latest"
+    strategy:
+      parallel: 1
+    steps:
+      - download: current
+        artifact: "app"
+      - script: npm install
+      - script: npx cypress run --record --group Windows/Chrome-69 --parallel --ci-build-id $BUILD_BUILDNUMBER --browser chrome --spec "cypress/e2e/frontend-spec-files/**/*.spec.js"
+        env:
+          # avoid warnings about terminal
+          TERM: xterm
+          # map the secret Cypress record key as environment variable for this step
+          CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEYs)
+    #  $(Build.DefinitionName)
+
+ 
+  - job: x3_edge
+    displayName: "3x Edge"
+    dependsOn: build
+    pool:
+      vmImage: "ubuntu-latest"  # Use a Windows image for Edge browser
+    strategy:
+      parallel: 1  # Set the parallelism to 3
+    steps:
+      - download: current
+        artifact: "app"
+      - script: npm install
+      - script: npx cypress run --record --group Edge --parallel   --ci-build-id $(Build.BuildNumber) --browser edge --spec "cypress/e2e/backend-spec-files/**/*.spec.js"
+        env:
+          TERM: xterm
+          CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEYs)
+
+
+  - job: x4_firefox
+    displayName: "2x Firefox"
+    dependsOn: build
+    pool:
+     vmImage: "ubuntu-latest"
+    strategy:
+     parallel: 1
+    steps:
+    - download: current
+      artifact: "app"
+    - script: npm install
+    - script: npx cypress run --record --group Windows/Firefox-69 --parallel --ci-build-id $(Build.BuildNumber) --browser firefox --spec "cypress/e2e/frontend-spec-files/**/*.spec.js"
+      env:
+        TERM: xterm
+        CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEYs)
+
+  - job: x5_webkit_safari
+    displayName: "5x Webkit Safari"
+    dependsOn: build
+    pool:
+      vmImage: 'ubuntu-latest'
+    strategy:
+      parallel: 1
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '20.x'
+          displayName: 'Install Node.js'
+
+      # NPM modules and Cypress binary should be cached
+      # otherwise the install will be too slow
+      # https://docs.microsoft.com/en-us/azure/devops/pipelines/caching/?view=azure-devops
+      # since the username / user home directory are not available via system variables
+      # (there is even an open question about it)
+      # https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops
+      # just use "/home/vsts" for now
+      - task: CacheBeta@1
+        inputs:
+          key: npm | $(Agent.OS) | package-lock.json
+          path: /home/vsts/.npm
+          restoreKeys: npm | $(Agent.OS) | package-lock.json
+        displayName: Cache NPM packages
+      - task: CacheBeta@1
+        inputs:
+          key: cypress | $(Agent.OS) | package-lock.json
+          path: /home/vsts/.cache/Cypress
+          restoreKeys: cypress | $(Agent.OS) | package-lock.json
+        displayName: Cache Cypress binary
+
+      # Install Node dependencies
+      - script: | 
+          npm install
+          sudo add-apt-repository universe
+          sudo apt-get update
+          sudo apt-get install -y libgles2 libx264
+          sudo apt-get install -y libgles2 ffmpeg
+          npx playwright install-deps webkit
+        displayName: 'Install NPM dependencies'
+
+        
+      - script: npm run test:webkit
+        displayName: 'Cypress test run on safari webkit'
+
+      - script: npx cypress run --record --parallel --ci-build-id $BUILD_BUILDNUMBER --group "firefox" --spec cypress\e2e\frontend-spec-files/**/*.spec.js
+        displayName: 'Run Cypress tests on firefox'
+
+      # The next command starts the server and runs Cypress end-to-end tests against it.
+      # The test artifacts (screenshots, test output) will be uploaded to Cypress Cloud.
+      # To record on Cypress Cloud we need to set CYPRESS_RECORD_KEY environment variable.
+      # For setting ci-build-id, BUILD_BUILDNUMBER is a good candidate
+
+      # Note that `npm run start & npx cypress run` is included below for brevity only.
+      # This pattern is not ideal because Cypress may run before the server reaches a true ready state.
+      # For better solutions see https://on.cypress.io/guides/continuous-integration.
+      - script: |
+          npx print-env AGENT
+          npx print-env BUILD
+          npx print-env SYSTEM
+          npm run start &
+          npx cypress run --record --parallel --ci-build-id $BUILD_BUILDNUMBER --group "firefox" --spec cypress\e2e\frontend-spec-files/**/*.spec.js
+        displayName: 'Run Cypress tests on webkit'
+        env:
+          # avoid warnings about terminal
+          TERM: xterm
+          # map the secret Cypress record key as environment variable for this step
+          CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEYs)     

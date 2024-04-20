@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  Firefox-tests-1:
+    image: cypressbase
+    command: ["npx", "cypress", "run", "--spec", "cypress/e2e/**/*.feature"]
+
+  Edge-tests-2:
+    image: cypressbase
+    command: ["npx", "cypress", "run", "--spec", "cypress/e2e/**/*.feature"]
+
+#   # Add more services as needed for additional parallelization
+  Chrome-tests-3:
+    image: cypressbase
+    command: ["npx", "cypress", "run", "--spec", "cypress/e2e/**/*.feature"]
+  Webkit-tests-4:
+    image: cypressbase
+    command: ["npx", "cypress", "run", "--spec", "cypress/e2e/**/*.feature"]
